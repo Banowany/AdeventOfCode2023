@@ -14,23 +14,14 @@ def dfs(grid: [str], source: (int, int), target: (int, int)):
         
         row, col = curr
         neighbours = []
-        if grid[row][col] == '^':
+        if row > 0 and grid[row - 1][col] != '#':
             neighbours.append((row - 1, col))
-        elif grid[row][col] == '>':
-            neighbours.append((row, col + 1))
-        elif grid[row][col] == 'v':
+        if row < n-1 and grid[row + 1][col] != '#':
             neighbours.append((row + 1, col))
-        elif grid[row][col] == '<':
+        if col > 0 and grid[row][col - 1] != '#':
             neighbours.append((row, col - 1))
-        else:
-            if row > 0 and grid[row - 1][col] != '#':
-                neighbours.append((row - 1, col))
-            if row < n-1 and grid[row + 1][col] != '#':
-                neighbours.append((row + 1, col))
-            if col > 0 and grid[row][col - 1] != '#':
-                neighbours.append((row, col - 1))
-            if col < n-1 and grid[row][col + 1] != '#':
-                neighbours.append((row, col + 1))
+        if col < n-1 and grid[row][col + 1] != '#':
+            neighbours.append((row, col + 1))
         
         for neighbour in neighbours:
             if neighbour not in visited:
@@ -38,7 +29,7 @@ def dfs(grid: [str], source: (int, int), target: (int, int)):
         
     return result
 
-with open('Day23/input.in', 'r') as file:
+with open('Day23/input                    .in', 'r') as file:
     grid = file.read().splitlines()
 
 n = len(grid)
@@ -48,3 +39,4 @@ target = (n - 1, grid[n - 1].index('.'))
 
 result = dfs(grid, source, target)
 print(result)
+   
